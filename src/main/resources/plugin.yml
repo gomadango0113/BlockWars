@@ -1,0 +1,3 @@
+name: BlockWars
+version: '${project.version}'
+main: org.gomadango0113.blockwars.BlockWars
