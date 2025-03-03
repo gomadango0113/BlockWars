@@ -1,0 +1,47 @@
+game:
+  time: 1800
+  block_type: "CAKE"
+  team_size: 2
+
+location:
+  lobby:
+    name: "world"
+    x:
+    y:
+    z:
+  red:
+    spawn:
+      x:
+      y:
+      z:
+    block:
+      x:
+      y:
+      z:
+  blue:
+    spawn:
+      x:
+      y:
+      z:
+    block:
+      x:
+      y:
+      z:
+  green:
+    spawn:
+      x:
+      y:
+      z:
+    block:
+      x:
+      y:
+      z:
+  yellow:
+    spawn:
+      x:
+      y:
+      z:
+    block:
+      x:
+      y:
+      z:
