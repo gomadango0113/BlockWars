@@ -2,6 +2,7 @@ package org.gomadango0113.blockwars;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.gomadango0113.blockwars.command.GameStartCommand;
 import org.gomadango0113.blockwars.manager.ScoreboardManager;
 
 public final class BlockWars extends JavaPlugin {
@@ -22,7 +23,7 @@ public final class BlockWars extends JavaPlugin {
     }
 
     public void registerCommand() {
-
+        getCommand("blockwars_start").setExecutor(new GameStartCommand());
     }
 
     public void registerListener() {

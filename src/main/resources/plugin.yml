@@ -1,3 +1,8 @@
 name: BlockWars
 version: '${project.version}'
 main: org.gomadango0113.blockwars.BlockWars
+
+commands:
+  blockwars_start:
+    description: ゲームを開始させるコマンド
+    permission: blockwars.command.game_start
