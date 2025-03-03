@@ -23,11 +23,12 @@ public class GameManager {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (status == GameStatus.WAITING) {
+                if (status == GameStatus.WAITING || status == GameStatus.COUNTING) {
                     status = GameStatus.COUNTING;
 
                     if (counttime[0] == 0) {
                         ChatUtil.sendGlobalMessage("ゲーム開始!");
+                        ScoreboardManager.setScoreboard(1);
                         status = GameStatus.RUNNING;
                     }
                     else {
