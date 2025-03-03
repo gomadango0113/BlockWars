@@ -2,6 +2,7 @@ package org.gomadango0113.blockwars;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.gomadango0113.blockwars.manager.ScoreboardManager;
 
 public final class BlockWars extends JavaPlugin {
 
@@ -10,6 +11,7 @@ public final class BlockWars extends JavaPlugin {
         saveDefaultConfig();
         registerCommand();
         registerListener();
+        ScoreboardManager.setScoreboard(0);
 
         getLogger().info("[BlockWars] プラグインの準備ができました。");
     }
