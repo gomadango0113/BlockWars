@@ -86,6 +86,10 @@ public class ScoreboardManager {
         if (board_runnable == null) {
             new BukkitRunnable() {
                 String time = null;
+                String red = null;
+                String blue = null;
+                String green = null;
+                String yellow = null;
                 @Override
                 public void run() {
                     if (GameManager.getStatus() == GameManager.GameStatus.RUNNING) {
@@ -93,8 +97,40 @@ public class ScoreboardManager {
                         if (time != null) {
                             game_obj.getScoreboard().resetScores(time);
                         }
-                        time = (ChatColor.GOLD + "残り時間： " + "");
+                        time = (ChatColor.GOLD + "残り時間： " + stringTime(GameManager.getTime()));
                         game_obj.getScore(time).setScore(28);
+
+                        //赤ブロック
+                        if (red != null) {
+                            game_obj.getScoreboard().resetScores(red);
+                        }
+                        red = (ChatColor.RED + "赤： " + getBlockString(TeamManager.GameTeam.RED));
+                        game_obj.getScore(red).setScore(26);
+
+                        //青ブロック
+                        if (blue != null) {
+                            game_obj.getScoreboard().resetScores(blue);
+                        }
+                        blue = (ChatColor.BLUE + "青： " + getBlockString(TeamManager.GameTeam.BLUE));
+                        game_obj.getScore(blue).setScore(25);
+
+                        //緑ブロック
+                        if (TeamManager.getActiveTeam().contains(TeamManager.GameTeam.GREEN)) {
+                            if (green != null) {
+                                game_obj.getScoreboard().resetScores(green);
+                            }
+                            green = (ChatColor.GREEN + "緑： " + getBlockString(TeamManager.GameTeam.GREEN));
+                            game_obj.getScore(green).setScore(24);
+                        }
+
+                        if (TeamManager.getActiveTeam().contains(TeamManager.GameTeam.YELLOW)) {
+                            //黄
+                            if (yellow != null) {
+                                game_obj.getScoreboard().resetScores(yellow);
+                            }
+                            yellow = (ChatColor.YELLOW + "黄： " + getBlockString(TeamManager.GameTeam.YELLOW));
+                            game_obj.getScore(yellow).setScore(23);
+                        }
 
                     }
 
@@ -104,6 +140,15 @@ public class ScoreboardManager {
                     board_runnable=this;
                 }
             }.runTaskTimer(BlockWars.getInstance(), 0L, 2L);
+        }
+    }
+
+    private static String getBlockString(TeamManager.GameTeam team) {
+        if (BlockManager.isBreak(team)) {
+            return "✖";
+        }
+        else {
+            return "●";
         }
     }
 
