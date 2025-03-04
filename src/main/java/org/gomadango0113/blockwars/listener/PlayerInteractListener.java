@@ -8,6 +8,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.gomadango0113.blockwars.manager.BlockManager;
 
@@ -17,15 +18,19 @@ public class PlayerInteractListener implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block get_block = event.getClickedBlock();
-        Location get_loc = get_block.getLocation();
+        Action action = event.getAction();
 
-        Material set_block = BlockManager.getBlock();
-
-        if (get_block.getType() == set_block) {
-            get_block.setType(set_block);
-            event.setCancelled(true);
-            event.setUseInteractedBlock(Event.Result.DENY);
-            event.setUseItemInHand(Event.Result.DENY);
+        if (action == Action.RIGHT_CLICK_BLOCK) {
+            if (get_block != null) {
+                Location get_loc = get_block.getLocation();
+                Material set_block = BlockManager.getBlock();
+                if (get_block.getType() == set_block) {
+                    get_block.setType(set_block);
+                    event.setCancelled(true);
+                    event.setUseInteractedBlock(Event.Result.DENY);
+                    event.setUseItemInHand(Event.Result.DENY);
+                }
+            }
         }
     }
 
