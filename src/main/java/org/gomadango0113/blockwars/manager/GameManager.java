@@ -29,6 +29,7 @@ public class GameManager {
                     if (counttime[0] == 0) {
                         ChatUtil.sendGlobalMessage("ゲーム開始!");
                         ScoreboardManager.setScoreboard(1);
+                        GeneratorManager.startGenerator();
                         status = GameStatus.RUNNING;
                     }
                     else {

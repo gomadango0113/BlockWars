@@ -3,6 +3,8 @@ game:
   block_type: "CAKE"
   team_size: 2
 
+generator:
+
 location:
   lobby:
     name: "world"
@@ -11,6 +13,10 @@ location:
     z:
   red:
     spawn:
+      x:
+      y:
+      z:
+    generator:
       x:
       y:
       z:
@@ -23,6 +29,10 @@ location:
       x:
       y:
       z:
+    generator:
+      x:
+      y:
+      z:
     block:
       x:
       y:
@@ -32,12 +42,20 @@ location:
       x:
       y:
       z:
+    generator:
+      x:
+      y:
+      z:
     block:
       x:
       y:
       z:
   yellow:
     spawn:
+      x:
+      y:
+      z:
+    generator:
       x:
       y:
       z:
