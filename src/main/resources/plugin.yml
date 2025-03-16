@@ -6,3 +6,6 @@ commands:
   blockwars_start:
     description: ゲームを開始させるコマンド
     permission: blockwars.command.game_start
+  blockwars_shop:
+    description: ショップに関するコマンド
+    permission: blockwars.command.shop
