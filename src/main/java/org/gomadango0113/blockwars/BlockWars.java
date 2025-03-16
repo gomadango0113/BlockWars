@@ -31,6 +31,8 @@ public final class BlockWars extends JavaPlugin {
         PluginManager plm = getServer().getPluginManager();
 
         plm.registerEvents(new PlayerInteractListener(), this);
+        plm.registerEvents(new PlayerEntityClickListener(), this);
+        plm.registerEvents(new PlayerInventoryClickListener(), this);
     }
 
     public static BlockWars getInstance() {
