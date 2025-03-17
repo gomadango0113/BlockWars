@@ -24,7 +24,7 @@ public class ShopCommand implements CommandExecutor, TabCompleter {
                 ChatUtil.sendMessage(player, "ショップ村人をスポーンさせました。");
             }
             else if (args[0].equalsIgnoreCase("open")) {
-                ShopManager.openShopMenu(player);
+                ShopManager.openShopMenu(player, 1);
                 ChatUtil.sendMessage(player, "ショップを開きました。");
             }
         }
