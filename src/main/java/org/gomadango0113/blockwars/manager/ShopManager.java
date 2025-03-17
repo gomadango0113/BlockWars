@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.gomadango0113.blockwars.BlockWars;
 
 public class ShopManager {
 
@@ -18,8 +19,8 @@ public class ShopManager {
         Villager villager = world.spawn(location, Villager.class);
         villager.setProfession(Villager.Profession.FARMER);
         villager.setAgeLock(true);
-        villager.setCustomName(ChatColor.AQUA + "BlockWars_Villager");
         villager.setCustomNameVisible(false);
+        villager.setMetadata(ChatColor.AQUA + "BlockWars_Villager", new FixedMetadataValue(BlockWars.getInstance(), true));
     }
 
     public static void openShopMenu(Player player) {
