@@ -7,6 +7,7 @@ import org.gomadango0113.blockwars.command.ShopCommand;
 import org.gomadango0113.blockwars.listener.PlayerEntityClickListener;
 import org.gomadango0113.blockwars.listener.PlayerInteractListener;
 import org.gomadango0113.blockwars.listener.PlayerInventoryClickListener;
+import org.gomadango0113.blockwars.listener.custom.ShopBuyListener;
 import org.gomadango0113.blockwars.manager.ScoreboardManager;
 
 public final class BlockWars extends JavaPlugin {
@@ -37,6 +38,7 @@ public final class BlockWars extends JavaPlugin {
         plm.registerEvents(new PlayerInteractListener(), this);
         plm.registerEvents(new PlayerEntityClickListener(), this);
         plm.registerEvents(new PlayerInventoryClickListener(), this);
+        plm.registerEvents(new ShopBuyListener(), this);
     }
 
     public static BlockWars getInstance() {
