@@ -1,6 +1,8 @@
 package org.gomadango0113.blockwars.manager;
 
 import org.bukkit.*;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftVillager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -27,8 +29,8 @@ public class ShopManager {
         Villager villager = world.spawn(location, Villager.class);
         villager.setProfession(Villager.Profession.FARMER);
         villager.setAgeLock(true);
-        villager.setCustomNameVisible(false);
-        villager.setMetadata(ChatColor.AQUA + "BlockWars_Villager", new FixedMetadataValue(BlockWars.getInstance(), true));
+        villager.setCustomName(ChatColor.AQUA + "ショップ");
+        villager.setCustomNameVisible(true);
     }
 
     public static void openShopMenu(Player player, int page) {

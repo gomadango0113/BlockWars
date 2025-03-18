@@ -19,7 +19,7 @@ public class PlayerEntityClickListener implements Listener {
         Entity click_entity = event.getRightClicked();
 
         if (click_entity instanceof Villager) {
-            if (click_entity.hasMetadata(ChatColor.AQUA + "BlockWars_Villager")) {
+            if (click_entity.hasMetadata(ChatColor.AQUA + "ショップ")) {
                 ShopManager.openShopMenu(player, 1);
                 event.setCancelled(true);
             }
