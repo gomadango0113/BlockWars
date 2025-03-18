@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.gomadango0113.blockwars.manager.ShopManager;
+import org.gomadango0113.blockwars.manager.TeamUpdateManager;
 import org.gomadango0113.blockwars.util.ChatUtil;
 
 import java.util.Arrays;
@@ -25,6 +26,17 @@ public class ShopCommand implements CommandExecutor, TabCompleter {
             }
             else if (args[0].equalsIgnoreCase("open")) {
                 ShopManager.openShopMenu(player, 1);
+                ChatUtil.sendMessage(player, "ショップを開きました。");
+            }
+        }
+        else if (cmd.getName().equalsIgnoreCase("blockwars_teamupdate")) {
+            Player player = (Player) send;
+            if (args[0].equalsIgnoreCase("spawn")) {
+                TeamUpdateManager.spawnTeamShop(player.getLocation());
+                ChatUtil.sendMessage(player, "チームアップデート村人をスポーンさせました。");
+            }
+            else if (args[0].equalsIgnoreCase("open")) {
+                TeamUpdateManager.openTeamUpdate(player);
                 ChatUtil.sendMessage(player, "ショップを開きました。");
             }
         }

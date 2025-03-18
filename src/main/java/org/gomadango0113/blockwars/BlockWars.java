@@ -30,6 +30,7 @@ public final class BlockWars extends JavaPlugin {
     public void registerCommand() {
         getCommand("blockwars_start").setExecutor(new GameStartCommand());
         getCommand("blockwars_shop").setExecutor(new ShopCommand());
+        getCommand("blockwars_teamupdate").setExecutor(new ShopCommand());
     }
 
     public void registerListener() {

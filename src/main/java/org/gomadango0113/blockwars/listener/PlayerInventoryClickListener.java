@@ -9,6 +9,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.gomadango0113.blockwars.manager.ShopManager;
+import org.gomadango0113.blockwars.manager.TeamManager;
+import org.gomadango0113.blockwars.manager.TeamUpdateManager;
+import org.gomadango0113.blockwars.util.ChatUtil;
 
 public class PlayerInventoryClickListener implements Listener {
 
@@ -17,12 +20,13 @@ public class PlayerInventoryClickListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         Inventory inv = event.getInventory();
         ItemStack item = event.getCurrentItem();
+        int slot = event.getSlot();
 
         if (item != null) {
             if (inv.getTitle().equalsIgnoreCase(ChatColor.BLACK + "ショップメニュー")) {
                 event.setCancelled(true);
 
-                if (event.getSlot() >= 1 && event.getSlot() <= 6) {
+                if (slot >= 1 && slot <= 6) {
                     ShopManager.openShopMenu(player, event.getSlot());
                 }
                 else {
@@ -31,6 +35,21 @@ public class PlayerInventoryClickListener implements Listener {
                         ShopManager.buyItem(player, buy_item);
                     }
                 }
+            }
+            else if (inv.getTitle().equalsIgnoreCase(ChatColor.BLACK + "チームアップデート")) {
+                if (slot == 10) {
+                    TeamManager.GameTeam p_team = TeamManager.joinTeam(player);
+                    int update = TeamUpdateManager.updateTeam(p_team, TeamUpdateManager.TeamUpdate.SWARD);
+
+                    if (update == 0) {
+                        ChatUtil.sendMessage(player, "アップデートしました。");
+                    }
+                    else {
+                        ChatUtil.sendMessage(player, "すでに上限です。");
+                    }
+                }
+
+                event.setCancelled(true);
             }
         }
     }
