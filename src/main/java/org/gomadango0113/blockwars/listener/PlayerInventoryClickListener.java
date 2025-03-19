@@ -30,7 +30,7 @@ public class PlayerInventoryClickListener implements Listener {
                     ShopManager.openShopMenu(player, event.getSlot());
                 }
                 else {
-                    ShopManager.BuyItem buy_item = ShopManager.BuyItem.getBuyItem(item);
+                    ShopManager.BuyItem buy_item = ShopManager.BuyItem.getBuyItem(item.getType());
                     if (buy_item != null) {
                         ShopManager.buyItem(player, buy_item);
                     }

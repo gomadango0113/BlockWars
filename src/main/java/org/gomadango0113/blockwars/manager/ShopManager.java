@@ -17,6 +17,7 @@ import org.gomadango0113.blockwars.event.ShopBuyEvent;
 import org.gomadango0113.blockwars.util.ItemUtil;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -39,16 +40,47 @@ public class ShopManager {
         inv.setItem(1, new ItemUtil(Material.GRASS).getItemStack("ブロック", null));
         inv.setItem(2, new ItemUtil(Material.WOOD_SWORD).getItemStack("剣", null));
         inv.setItem(3, new ItemUtil(Material.IRON_CHESTPLATE).getItemStack("装備", null));
-        inv.setItem(4, new ItemUtil(Material.STONE_PICKAXE).getItemStack("ピッケル", null));
+        inv.setItem(4, new ItemUtil(Material.STONE_PICKAXE).getItemStack("ツール", null));
         inv.setItem(5, new ItemUtil(Material.BOW).getItemStack("弓矢", null));
         inv.setItem(6, new ItemUtil(Material.TNT).getItemStack("その他", null));
 
         if (page == 1) {
-            inv.setItem(19, new ItemStack(Material.WOOL, 16));
-            inv.setItem(20, new ItemStack(Material.STAINED_CLAY, 16));
+            //ブロックメニュー
+            inv.setItem(19, new ItemUtil(Material.WOOL, 16).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が16個必要です。")));
+            inv.setItem(20, new ItemUtil(Material.STAINED_CLAY, 16).getItemStack(null, null));
             inv.setItem(21, new ItemUtil(Material.GLASS).getItemStack(null, null));
-            inv.setItem(22, new ItemStack(Material.ENDER_STONE));
-            inv.setItem(23, new ItemStack(Material.WOOD));
+            inv.setItem(22, new ItemUtil(Material.ENDER_STONE).getItemStack(null, null));
+            inv.setItem(23, new ItemUtil(Material.WOOD).getItemStack(null, null));
+        }
+        else if (page == 2) {
+            //剣メニュー
+            inv.setItem(19, new ItemUtil(Material.WOOD_SWORD).getItemStack(null, null));
+            inv.setItem(20, new ItemUtil(Material.STONE_SWORD).getItemStack(null, null));
+            inv.setItem(21, new ItemUtil(Material.IRON_SWORD).getItemStack(null, null));
+            inv.setItem(22, new ItemUtil(Material.DIAMOND_SWORD).getItemStack(null, null));
+        }
+        else if (page == 3) {
+            //装備メニュー
+            inv.setItem(20, new ItemUtil(Material.DIAMOND_HELMET).getItemStack(null, null));
+            inv.setItem(29, new ItemUtil(Material.DIAMOND_CHESTPLATE).getItemStack(null, null));
+            inv.setItem(38, new ItemUtil(Material.DIAMOND_LEGGINGS).getItemStack(null, null));
+            inv.setItem(47, new ItemUtil(Material.DIAMOND_BOOTS).getItemStack(null, null));
+        }
+        else if (page == 4) {
+            //ツールメニュー
+            inv.setItem(19, new ItemUtil(Material.WOOD_PICKAXE).getItemStack(null, null));
+            inv.setItem(20, new ItemUtil(Material.STONE_PICKAXE).getItemStack(null, null));
+            inv.setItem(21, new ItemUtil(Material.IRON_PICKAXE).getItemStack(null, null));
+            inv.setItem(22, new ItemUtil(Material.DIAMOND_PICKAXE).getItemStack(null, null));
+            inv.setItem(23, new ItemUtil(Material.GOLD_PICKAXE).getItemStack(null, null));
+        }
+        else if (page == 5) {
+            //弓矢メニュー
+            inv.setItem(19, new ItemUtil(Material.BOW).getItemStack(null, null));
+        }
+        else if (page == 6) {
+            //その他メニュー
+            inv.setItem(19, new ItemUtil(Material.TNT).getItemStack(null, null));
         }
 
         player.openInventory(inv);
@@ -112,6 +144,14 @@ public class ShopManager {
             BuyItem[] buy_items = BuyItem.values();
             return Arrays.stream(buy_items)
                     .filter(buyitem -> buyitem.getReturnItem().isSimilar(return_item))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        public static BuyItem getBuyItem(Material material) {
+            BuyItem[] buy_items = BuyItem.values();
+            return Arrays.stream(buy_items)
+                    .filter(buyitem -> buyitem.getReturnItem().getType() == material)
                     .findFirst()
                     .orElse(null);
         }
