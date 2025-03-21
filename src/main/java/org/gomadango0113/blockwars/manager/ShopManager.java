@@ -47,40 +47,40 @@ public class ShopManager {
         if (page == 1) {
             //ブロックメニュー
             inv.setItem(19, new ItemUtil(Material.WOOL, 16).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が16個必要です。")));
-            inv.setItem(20, new ItemUtil(Material.STAINED_CLAY, 16).getItemStack(null, null));
-            inv.setItem(21, new ItemUtil(Material.GLASS).getItemStack(null, null));
-            inv.setItem(22, new ItemUtil(Material.ENDER_STONE).getItemStack(null, null));
-            inv.setItem(23, new ItemUtil(Material.WOOD).getItemStack(null, null));
+            inv.setItem(20, new ItemUtil(Material.STAINED_CLAY, 16).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(21, new ItemUtil(Material.GLASS).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(22, new ItemUtil(Material.ENDER_STONE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(23, new ItemUtil(Material.WOOD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
         }
         else if (page == 2) {
             //剣メニュー
-            inv.setItem(19, new ItemUtil(Material.WOOD_SWORD).getItemStack(null, null));
-            inv.setItem(20, new ItemUtil(Material.STONE_SWORD).getItemStack(null, null));
-            inv.setItem(21, new ItemUtil(Material.IRON_SWORD).getItemStack(null, null));
-            inv.setItem(22, new ItemUtil(Material.DIAMOND_SWORD).getItemStack(null, null));
+            inv.setItem(19, new ItemUtil(Material.WOOD_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(20, new ItemUtil(Material.STONE_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(21, new ItemUtil(Material.IRON_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(22, new ItemUtil(Material.DIAMOND_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
         }
         else if (page == 3) {
             //装備メニュー
-            inv.setItem(20, new ItemUtil(Material.DIAMOND_HELMET).getItemStack(null, null));
-            inv.setItem(29, new ItemUtil(Material.DIAMOND_CHESTPLATE).getItemStack(null, null));
-            inv.setItem(38, new ItemUtil(Material.DIAMOND_LEGGINGS).getItemStack(null, null));
-            inv.setItem(47, new ItemUtil(Material.DIAMOND_BOOTS).getItemStack(null, null));
+            inv.setItem(20, new ItemUtil(Material.DIAMOND_HELMET).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(29, new ItemUtil(Material.DIAMOND_CHESTPLATE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(38, new ItemUtil(Material.DIAMOND_LEGGINGS).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(47, new ItemUtil(Material.DIAMOND_BOOTS).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
         }
         else if (page == 4) {
             //ツールメニュー
-            inv.setItem(19, new ItemUtil(Material.WOOD_PICKAXE).getItemStack(null, null));
-            inv.setItem(20, new ItemUtil(Material.STONE_PICKAXE).getItemStack(null, null));
-            inv.setItem(21, new ItemUtil(Material.IRON_PICKAXE).getItemStack(null, null));
-            inv.setItem(22, new ItemUtil(Material.DIAMOND_PICKAXE).getItemStack(null, null));
-            inv.setItem(23, new ItemUtil(Material.GOLD_PICKAXE).getItemStack(null, null));
+            inv.setItem(19, new ItemUtil(Material.WOOD_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(20, new ItemUtil(Material.STONE_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(21, new ItemUtil(Material.IRON_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(22, new ItemUtil(Material.DIAMOND_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(23, new ItemUtil(Material.GOLD_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
         }
         else if (page == 5) {
             //弓矢メニュー
-            inv.setItem(19, new ItemUtil(Material.BOW).getItemStack(null, null));
+            inv.setItem(19, new ItemUtil(Material.BOW).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
         }
         else if (page == 6) {
             //その他メニュー
-            inv.setItem(19, new ItemUtil(Material.TNT).getItemStack(null, null));
+            inv.setItem(19, new ItemUtil(Material.TNT).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
         }
 
         player.openInventory(inv);
@@ -122,12 +122,45 @@ public class ShopManager {
     }
 
     public enum BuyItem {
-        WOOL(new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOL, 16));
 
+        //ブロック
+        WOOL(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOL, 16)),
+        STAINED_CLAY(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.STAINED_CLAY, 16)),
+        GLASS(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.GLASS)),
+        END_STONE(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.ENDER_STONE)),
+        WOOD(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOD)),
+
+        //剣
+        WOODEN_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOD_SWORD)),
+        STONE_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.STONE_SWORD)),
+        IRON_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.IRON_SWORD)),
+        DIAMOND_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_SWORD)),
+
+        //装備
+        HELMET(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_HELMET)),
+        CHESTPLATE(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_CHESTPLATE)),
+        LEGGINGS(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_LEGGINGS)),
+        BOOTS(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_BOOTS)),
+
+        //ツール
+        WOODEN_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOD_PICKAXE)),
+        STONE_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.STONE_PICKAXE)),
+        IRON_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.IRON_PICKAXE)),
+        DIAMOND_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_PICKAXE)),
+        GOLD_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.GOLD_PICKAXE)),
+
+        //弓矢
+        BOW(BuyType.BOW, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.BOW)),
+
+        //その他
+        TNT(BuyType.OTHER, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.TNT));
+
+        private final BuyType type;
         private final ItemStack need_item;
         private final ItemStack return_item;
 
-        BuyItem(ItemStack need_item, ItemStack return_item) {
+        BuyItem(BuyType type, ItemStack need_item, ItemStack return_item) {
+            this.type = type;
             this.need_item = need_item;
             this.return_item = return_item;
         }
@@ -155,5 +188,18 @@ public class ShopManager {
                     .findFirst()
                     .orElse(null);
         }
+
+        public BuyType getType() {
+            return type;
+        }
+    }
+
+    public enum BuyType {
+        BLOCK,
+        SWORD,
+        TOOL,
+        EQUIPMENT,
+        BOW,
+        OTHER,
     }
 }
