@@ -19,6 +19,10 @@ public class ItemUtil {
         this.itemstack = new ItemStack(material, amount);
     }
 
+    public ItemUtil(ItemStack itemStack) {
+        this.itemstack = itemStack;
+    }
+
     public ItemStack getItemStack(String name, List<String> lore) {
         ItemMeta meta = itemstack.getItemMeta();
         List<String> get_lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
