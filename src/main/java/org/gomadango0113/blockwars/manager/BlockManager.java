@@ -1,11 +1,14 @@
 package org.gomadango0113.blockwars.manager;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.material.Bed;
 import org.gomadango0113.blockwars.BlockWars;
 import org.gomadango0113.blockwars.util.ChatUtil;
 
@@ -30,11 +33,13 @@ public class BlockManager {
         Location loc = block.getLocation().clone();
         Location team_block = LocationManager.getTeamBlock(team);
 
-        if (loc.equals(team_block)) {
-            event.setCancelled(true);
-            block.setType(Material.AIR);
+        if (block.getType() == getBlock()) {
+            if (loc.equals(team_block)) {
+                event.setCancelled(true);
+                block.setType(Material.AIR);
 
-            ChatUtil.sendGlobalMessage(player.getName() + "が" + team.getTeamString(false) + "のブロックを破壊しました。");
+                ChatUtil.sendGlobalMessage(player.getName() + "が" + team.getTeamString(false) + "のブロックを破壊しました。");
+            }
         }
     }
 
@@ -61,6 +66,18 @@ public class BlockManager {
         }
 
         return false;
+    }
+
+    public static TeamManager.GameTeam getLocationTeamBlock(Location location) {
+        location = location.clone().add(0, 0, 0);
+
+        for (TeamManager.GameTeam team : TeamManager.getGameTeam()) {
+            if (location.equals(LocationManager.getTeamBlock(team))) {
+                return team;
+            }
+        }
+
+        return TeamManager.GameTeam.UNKNOWN;
     }
 
 }
