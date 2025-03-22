@@ -16,9 +16,7 @@ import org.gomadango0113.blockwars.BlockWars;
 import org.gomadango0113.blockwars.event.ShopBuyEvent;
 import org.gomadango0113.blockwars.util.ItemUtil;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ShopManager {
@@ -46,41 +44,41 @@ public class ShopManager {
 
         if (page == 1) {
             //ブロックメニュー
-            inv.setItem(19, new ItemUtil(Material.WOOL, 16).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が16個必要です。")));
-            inv.setItem(20, new ItemUtil(Material.STAINED_CLAY, 16).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(21, new ItemUtil(Material.GLASS).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(22, new ItemUtil(Material.ENDER_STONE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(23, new ItemUtil(Material.WOOD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(19, getItemStackLore(BuyItem.WOOL));
+            inv.setItem(20, getItemStackLore(BuyItem.STAINED_CLAY));
+            inv.setItem(21, getItemStackLore(BuyItem.GLASS));
+            inv.setItem(22, getItemStackLore(BuyItem.END_STONE));
+            inv.setItem(23, getItemStackLore(BuyItem.WOOD));
         }
         else if (page == 2) {
             //剣メニュー
-            inv.setItem(19, new ItemUtil(Material.WOOD_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(20, new ItemUtil(Material.STONE_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(21, new ItemUtil(Material.IRON_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(22, new ItemUtil(Material.DIAMOND_SWORD).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(19, getItemStackLore(BuyItem.WOODEN_SWORD));
+            inv.setItem(20, getItemStackLore(BuyItem.STONE_SWORD));
+            inv.setItem(21, getItemStackLore(BuyItem.IRON_SWORD));
+            inv.setItem(22, getItemStackLore(BuyItem.DIAMOND_SWORD));
         }
         else if (page == 3) {
             //装備メニュー
-            inv.setItem(20, new ItemUtil(Material.DIAMOND_HELMET).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(29, new ItemUtil(Material.DIAMOND_CHESTPLATE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(38, new ItemUtil(Material.DIAMOND_LEGGINGS).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(47, new ItemUtil(Material.DIAMOND_BOOTS).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(20, getItemStackLore(BuyItem.HELMET));
+            inv.setItem(29, getItemStackLore(BuyItem.CHESTPLATE));
+            inv.setItem(38, getItemStackLore(BuyItem.LEGGINGS));
+            inv.setItem(47, getItemStackLore(BuyItem.BOOTS));
         }
         else if (page == 4) {
             //ツールメニュー
-            inv.setItem(19, new ItemUtil(Material.WOOD_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(20, new ItemUtil(Material.STONE_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(21, new ItemUtil(Material.IRON_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(22, new ItemUtil(Material.DIAMOND_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
-            inv.setItem(23, new ItemUtil(Material.GOLD_PICKAXE).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(19, getItemStackLore(BuyItem.WOODEN_PICKAXE));
+            inv.setItem(20, getItemStackLore(BuyItem.STONE_PICKAXE));
+            inv.setItem(21, getItemStackLore(BuyItem.IRON_PICKAXE));
+            inv.setItem(22, getItemStackLore(BuyItem.DIAMOND_PICKAXE));
+            inv.setItem(23, getItemStackLore(BuyItem.GOLD_PICKAXE));
         }
         else if (page == 5) {
             //弓矢メニュー
-            inv.setItem(19, new ItemUtil(Material.BOW).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(19, getItemStackLore(BuyItem.BOW));
         }
         else if (page == 6) {
             //その他メニュー
-            inv.setItem(19, new ItemUtil(Material.TNT).getItemStack(null, Collections.singletonList(ChatColor.AQUA + "鉄が個必要です。")));
+            inv.setItem(19, getItemStackLore(BuyItem.TNT));
         }
 
         player.openInventory(inv);
@@ -121,39 +119,54 @@ public class ShopManager {
         return false;
     }
 
+    private static ItemStack getItemStackLore(BuyItem buyItem) {
+        Map<Material, String> map = new HashMap<>();
+        map.put(Material.IRON_INGOT, "鉄");
+        map.put(Material.GOLD_INGOT, "金");
+        map.put(Material.DIAMOND, "ダイヤ");
+
+        ItemStack need_item = buyItem.getNeedItem().clone();
+        ItemStack return_item = buyItem.getReturnItem().clone();
+
+        return new ItemUtil(return_item).getItemStack(
+                null,
+                Collections.singletonList(ChatColor.AQUA + map.getOrDefault(need_item.getType(), "アイテム") + "が" + need_item.getAmount()  +"個必要です。")
+        ).clone();
+    }
+
     public enum BuyItem {
 
         //ブロック
         WOOL(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOL, 16)),
         STAINED_CLAY(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.STAINED_CLAY, 16)),
-        GLASS(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.GLASS)),
-        END_STONE(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.ENDER_STONE)),
-        WOOD(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOD)),
+        GLASS(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 20), new ItemStack(Material.GLASS, 4)),
+        END_STONE(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 15), new ItemStack(Material.ENDER_STONE, 8)),
+        WOOD(BuyType.BLOCK, new ItemStack(Material.IRON_INGOT, 15), new ItemStack(Material.WOOD, 8)),
 
         //剣
         WOODEN_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOD_SWORD)),
-        STONE_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.STONE_SWORD)),
-        IRON_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.IRON_SWORD)),
-        DIAMOND_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_SWORD)),
+        STONE_SWORD(BuyType.SWORD, new ItemStack(Material.IRON_INGOT, 20), new ItemStack(Material.STONE_SWORD)),
+        IRON_SWORD(BuyType.SWORD, new ItemStack(Material.GOLD_INGOT, 10), new ItemStack(Material.IRON_SWORD)),
+        DIAMOND_SWORD(BuyType.SWORD, new ItemStack(Material.GOLD_INGOT, 20), new ItemStack(Material.DIAMOND_SWORD)),
 
         //装備
-        HELMET(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_HELMET)),
-        CHESTPLATE(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_CHESTPLATE)),
-        LEGGINGS(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_LEGGINGS)),
-        BOOTS(BuyType.EQUIPMENT, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_BOOTS)),
+        HELMET(BuyType.EQUIPMENT, new ItemStack(Material.GOLD_INGOT, 10), new ItemStack(Material.DIAMOND_HELMET)),
+        CHESTPLATE(BuyType.EQUIPMENT, new ItemStack(Material.GOLD_INGOT, 25), new ItemStack(Material.DIAMOND_CHESTPLATE)),
+        LEGGINGS(BuyType.EQUIPMENT, new ItemStack(Material.GOLD_INGOT, 20), new ItemStack(Material.DIAMOND_LEGGINGS)),
+        BOOTS(BuyType.EQUIPMENT, new ItemStack(Material.GOLD_INGOT, 10), new ItemStack(Material.DIAMOND_BOOTS)),
 
         //ツール
         WOODEN_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.WOOD_PICKAXE)),
-        STONE_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.STONE_PICKAXE)),
-        IRON_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.IRON_PICKAXE)),
-        DIAMOND_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.DIAMOND_PICKAXE)),
-        GOLD_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.GOLD_PICKAXE)),
+        STONE_PICKAXE(BuyType.TOOL, new ItemStack(Material.IRON_INGOT, 15), new ItemStack(Material.STONE_PICKAXE)),
+        IRON_PICKAXE(BuyType.TOOL, new ItemStack(Material.GOLD_INGOT, 10), new ItemStack(Material.IRON_PICKAXE)),
+        DIAMOND_PICKAXE(BuyType.TOOL, new ItemStack(Material.GOLD_INGOT, 20), new ItemStack(Material.DIAMOND_PICKAXE)),
+        GOLD_PICKAXE(BuyType.TOOL, new ItemStack(Material.GOLD_INGOT, 15), new ItemStack(Material.GOLD_PICKAXE)),
 
         //弓矢
-        BOW(BuyType.BOW, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.BOW)),
+        BOW(BuyType.BOW, new ItemStack(Material.IRON_INGOT, 20), new ItemStack(Material.BOW)),
 
         //その他
-        TNT(BuyType.OTHER, new ItemStack(Material.IRON_INGOT, 10), new ItemStack(Material.TNT));
+        TNT(BuyType.OTHER, new ItemStack(Material.GOLD_INGOT, 20), new ItemStack(Material.TNT));
 
         private final BuyType type;
         private final ItemStack need_item;
