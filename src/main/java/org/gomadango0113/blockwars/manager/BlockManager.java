@@ -3,17 +3,18 @@ package org.gomadango0113.blockwars.manager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.material.Bed;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.gomadango0113.blockwars.BlockWars;
 import org.gomadango0113.blockwars.util.ChatUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class BlockManager {
 
@@ -39,6 +40,51 @@ public class BlockManager {
                 block.setType(Material.AIR);
 
                 ChatUtil.sendGlobalMessage(player.getName() + "が" + team.getTeamString(false) + "のブロックを破壊しました。");
+
+                new BukkitRunnable() {
+                    int time = 30;
+                    @Override
+                    public void run() {
+                        if (TeamManager.getTeamSize() == 2) {
+                            ChatUtil.sendMessage(player, "ゲーム終了!!");
+                            this.cancel();
+                        }
+                        else {
+                            if (TeamManager.getDeadTeamList().isEmpty() || TeamManager.getDeadTeamList().size() == 1) {
+                                if (time == 0) {
+                                    Set<OfflinePlayer> leave_list = new HashSet<>(TeamManager.getTeamPlayers(team));
+                                    TeamManager.getDeadTeamList().add(team);
+                                    for (OfflinePlayer break_team_player : leave_list) {
+                                        TeamManager.leaveTeam(break_team_player);
+
+                                        if (break_team_player.isOnline()) {
+                                            TeamManager.joinTeam(break_team_player.getPlayer());
+                                        }
+                                    }
+
+                                    ChatUtil.sendMessage(player,  team.getTeamString(false) + "は、別チームへ移籍しました。");
+                                    this.cancel();
+                                }
+                                else {
+                                    if (loc.getBlock().getType() == BlockManager.getBlock()) {
+                                        ChatUtil.sendMessage(player, "ブロックが再設置されました。");
+                                        this.cancel();
+                                    }
+
+                                    if (time == 45 || time == 30 || time == 15) {
+                                        ChatUtil.sendGlobalMessage(team.getTeamString(false) + "が破壊されるまで" + time + "秒。");
+                                    }
+
+                                    time--;
+                                }
+                            }
+                            else {
+                                ChatUtil.sendMessage(player, "ゲーム終了!!");
+                                this.cancel();
+                            }
+                        }
+                    }
+                }.runTaskTimer(BlockWars.getInstance(), 0L, 20L);
             }
         }
     }

@@ -23,6 +23,8 @@ public class TeamManager {
     private static Team yellow_team = board.getTeam("yellow");
     private static Team admin_team = board.getTeam("admin");
 
+    private static List<GameTeam> dead_team_list = new ArrayList<>();
+
     static {
         createTeam();
 
@@ -84,6 +86,10 @@ public class TeamManager {
             Map<GameTeam, Integer> team_size = new HashMap<>();
             for (GameTeam team : TeamManager.getActiveTeam()) {
                 team_size.put(team, getTeamPlayers(team).size());
+
+                for (GameTeam dead : TeamManager.getDeadTeamList()) {
+                    team_size.remove(dead);
+                }
             }
 
             Integer min_team_value = Collections.min(team_size.entrySet(), Comparator.comparingInt(Map.Entry::getValue)).getValue();
@@ -235,6 +241,10 @@ public class TeamManager {
 
     public static void setTeamSize(int size) {
         TeamManager.team_size = size;
+    }
+
+    public static List<GameTeam> getDeadTeamList() {
+        return dead_team_list;
     }
 
     public enum GameTeam {
