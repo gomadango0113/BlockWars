@@ -30,6 +30,7 @@ public class GameManager {
                         ChatUtil.sendGlobalMessage("ゲーム開始!");
                         ScoreboardManager.setScoreboard(1);
                         GeneratorManager.startGenerator();
+                        TeamManager.teamRandom();
                         status = GameStatus.RUNNING;
                     }
                     else {
