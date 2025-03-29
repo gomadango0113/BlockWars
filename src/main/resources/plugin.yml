@@ -12,3 +12,6 @@ commands:
   blockwars_teamupdate:
     description: チームアップデートに関するコマンド
     permission: blockwars.command.teamupdate
+  blockwars_team:
+    description: チームに関するコマンド
+    permission: blockwars.command.team

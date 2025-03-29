@@ -4,6 +4,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.gomadango0113.blockwars.command.GameStartCommand;
 import org.gomadango0113.blockwars.command.ShopCommand;
+import org.gomadango0113.blockwars.command.TeamCommand;
 import org.gomadango0113.blockwars.listener.*;
 import org.gomadango0113.blockwars.listener.custom.ShopBuyListener;
 import org.gomadango0113.blockwars.manager.ScoreboardManager;
@@ -29,6 +30,7 @@ public final class BlockWars extends JavaPlugin {
         getCommand("blockwars_start").setExecutor(new GameStartCommand());
         getCommand("blockwars_shop").setExecutor(new ShopCommand());
         getCommand("blockwars_teamupdate").setExecutor(new ShopCommand());
+        getCommand("blockwars_team").setExecutor(new TeamCommand());
     }
 
     public void registerListener() {
